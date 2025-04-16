@@ -1,0 +1,16 @@
+GET {{server_url}}/api/post/
+Content-Type: application/json
+
+POST {{server_url}}/api/post/
+Content-Type: application/json
+X-CSRFToken: DGzLkojlVjXI2jD7SeaA7hX1xe0PbS4h
+
+{
+    "title": "test",
+    "status": "Seed",
+    "summary": "testin things out",
+    "category_id": 1,
+    "slug": "test",
+    "content": "hello this is a test"
+}
+// {{console.info(request)}}
