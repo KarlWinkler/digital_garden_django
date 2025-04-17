@@ -5,5 +5,4 @@ Content-Type: application/json
   "email": "{{email}}",
   "password": "{{password}}"
 }
-{{console.info(response.rawHeaders)}}
-# > {% client.global.set("csrf_token", response.options.cookieJar) %}
+// {{console.info(response.rawHeaders)}}

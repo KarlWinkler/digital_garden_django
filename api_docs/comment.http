@@ -1,0 +1,35 @@
+GET {{server_url}}/api/post/comment/all
+Content-Type: application/json
+
+GET {{server_url}}/api/post/1/comment
+Content-Type: application/json
+
+POST {{server_url}}/api/post/3/comment
+Content-Type: application/json
+X-CSRFToken: {{csrf}}
+
+{
+    "user_id": 1,
+    "content": "really good post"
+}
+
+PUT {{server_url}}/api/post/comment/1
+Content-Type: application/json
+X-CSRFToken: {{csrf}}
+
+{
+    "user_id": 1,
+    "content": "Updated Comment"
+}
+
+PUT {{server_url}}/api/post/comment/1
+Content-Type: application/json
+X-CSRFToken: {{csrf}}
+
+{
+    "archived": false
+}
+
+DELETE {{server_url}}/api/post/comment/1
+Content-Type: application/json
+X-CSRFToken: {{csrf}}

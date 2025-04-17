@@ -18,6 +18,7 @@ class StatusChoices(models.TextChoices):
 
 class Post(models.Model):
     objects = ArchiveManager()
+    all_objects = models.Manager()
 
     content = models.TextField()
     title = models.TextField()
@@ -27,20 +28,24 @@ class Post(models.Model):
     archived = models.BooleanField(default=False)
     views = models.IntegerField(default=0)
 
-    created_at = models.DateField(auto_now_add=True)
-    updated_at = models.DateField(auto_now=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
     category = models.ForeignKey('post.Category', on_delete=models.PROTECT, related_name="posts")
+
+    def __str__(self):
+        return self.title
 
 
 class Comment(models.Model):
     objects = ArchiveManager()
+    all_objects = models.Manager()
 
     content = models.TextField()
     archived = models.BooleanField(default=False)
 
-    created_at = models.DateField(auto_now_add=True)
-    updated_at = models.DateField(auto_now=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
     # PROTECT to encourage archive rather than delete as the default fuctionality.
     user = models.ForeignKey('user_auth.User', on_delete=models.PROTECT)

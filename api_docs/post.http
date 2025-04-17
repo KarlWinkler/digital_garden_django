@@ -3,7 +3,7 @@ Content-Type: application/json
 
 POST {{server_url}}/api/post/
 Content-Type: application/json
-X-CSRFToken: DGzLkojlVjXI2jD7SeaA7hX1xe0PbS4h
+X-CSRFToken: {{csrf}}
 
 {
     "title": "test",
@@ -14,3 +14,29 @@ X-CSRFToken: DGzLkojlVjXI2jD7SeaA7hX1xe0PbS4h
     "content": "hello this is a test"
 }
 // {{console.info(request)}}
+
+PUT {{server_url}}/api/post/5
+Contenet-Type: application/json
+X-CSRFToken: {{csrf}}
+
+{
+    "title": "Brand New",
+    "status": "Flower",
+    "summary": "Making Waves!",
+    "category_id": 1,
+    "slug": "test",
+    "content": "hello this is a test"
+}
+
+PUT {{server_url}}/api/post/5
+Content-Type: application/json
+X-CSRFToken: {{csrf}}
+
+{
+    "archived": false
+}
+
+
+DELETE {{server_url}}/api/post/5
+Content-Type: application/json
+X-CSRFToken: {{csrf}}
