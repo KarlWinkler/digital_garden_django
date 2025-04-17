@@ -22,7 +22,7 @@ class Post(models.Model):
 
     content = models.TextField()
     title = models.TextField()
-    slug = models.SlugField()
+    slug = models.SlugField(unique=True)
     status = models.CharField(max_length=6, choices=StatusChoices, default=StatusChoices.SEED)
     summary = models.TextField(blank=True)
     archived = models.BooleanField(default=False)

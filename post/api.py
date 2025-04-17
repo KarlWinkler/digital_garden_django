@@ -1,4 +1,5 @@
 from django.shortcuts import render, get_object_or_404
+from django.db.utils import IntegrityError
 
 from ninja import Router
 from ninja.security import django_auth
@@ -25,26 +26,33 @@ def list_posts(request):
     return 200, Category.objects.all().select_related()
 
 
-@router.get("/{id}", response={200: PostSchema})
-def get_post(request, id: int):
-    return 200, get_object_or_404(Post, pk=id)
+@router.get("/{key}", response={200: PostSchema})
+def get_post(request, key: str):
+    return 200, get_object_or_404(Post, slug=key)
 
 
-@router.post("/", response={201: PostSchema}, auth=django_auth)
+@router.post("/", response={201: PostSchema, 400: str}, auth=django_auth)
 def create_post(request, data: PostCreateSchema):
-    post = Post.objects.create(**data.dict(exclude_unset=True))
+    post = Post.objects.filter(slug=data.slug)
+    if post.exists():
+        return 400, "Slug already exists"
+    else:
+        post = Post.objects.create(**data.dict(exclude_unset=True))
 
-    return 201, post
+        return 201, post
 
 
-@router.put("/{id}", response={200: PostSchema, 404: str}, auth=django_auth)
-def update_post(request, id: int, data: PostUpdateSchema):
-    post = Post.all_objects.filter(pk=id)
+@router.put("/{key}", response={200: PostSchema, 404: str, 400: str}, auth=django_auth)
+def update_post(request, key: int, data: PostUpdateSchema):
+    post = Post.all_objects.filter(pk=key)
 
     if post.exists():
-        post.update(**data.dict(exclude_unset=True))
+        try:
+            post.update(**data.dict(exclude_unset=True))
 
-        return 200, post.first()
+            return 200, post.first()
+        except IntegrityError:
+            return 400, "Slug already exists"
     else:
         return 404, "Not Found"
 

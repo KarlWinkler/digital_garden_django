@@ -1,6 +1,9 @@
 GET {{server_url}}/api/post/
 Content-Type: application/json
 
+GET {{server_url}}/api/post/test
+Content-Type: application/json
+
 POST {{server_url}}/api/post/
 Content-Type: application/json
 X-CSRFToken: {{csrf}}
@@ -10,12 +13,12 @@ X-CSRFToken: {{csrf}}
     "status": "Seed",
     "summary": "testin things out",
     "category_id": 1,
-    "slug": "test",
+    "slug": "test_another",
     "content": "hello this is a test"
 }
 // {{console.info(request)}}
 
-PUT {{server_url}}/api/post/5
+PUT {{server_url}}/api/post/2
 Contenet-Type: application/json
 X-CSRFToken: {{csrf}}
 
@@ -28,7 +31,7 @@ X-CSRFToken: {{csrf}}
     "content": "hello this is a test"
 }
 
-PUT {{server_url}}/api/post/5
+PUT {{server_url}}/api/post/1
 Content-Type: application/json
 X-CSRFToken: {{csrf}}
 
