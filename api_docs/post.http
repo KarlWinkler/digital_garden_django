@@ -27,8 +27,8 @@ X-CSRFToken: {{csrf}}
     "status": "Flower",
     "summary": "Making Waves!",
     "category_id": 1,
-    "slug": "test",
-    "content": "hello this is a test"
+    "slug": "test_another",
+    "content": "hello this is a test\n# Header1\n- bullet point\n\n`code`\n\n```python\ndef a()\n\n    update()\n```"
 }
 
 PUT {{server_url}}/api/post/1

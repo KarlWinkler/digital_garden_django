@@ -5,4 +5,4 @@ Content-Type: application/json
   "email": "{{email}}",
   "password": "{{password}}"
 }
-// {{console.info(response.rawHeaders)}}
+{{console.info(response.rawHeaders)}}

@@ -49,6 +49,7 @@ def update_post(request, key: int, data: PostUpdateSchema):
     if post.exists():
         try:
             post.update(**data.dict(exclude_unset=True))
+            post.first().save(update_fields=['updated_at']) # to update updated_at field
 
             return 200, post.first()
         except IntegrityError:
