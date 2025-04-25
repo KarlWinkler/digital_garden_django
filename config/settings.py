@@ -16,13 +16,13 @@ from dotenv import load_dotenv
 import json
 import os
 
-dotenv_path = os.path.join(os.path.dirname(__file__), '.env')
+dotenv_path = os.path.join(os.path.dirname(__file__), '..', '.env')
 load_dotenv(dotenv_path)
 
 SECRET_KEY = str(os.getenv("SECRET_KEY"))
-ALLOWED_HOSTS = json.loads(os.getenv("ALLOWED_HOSTS"))
+ALLOWED_HOSTS = json.loads(os.getenv("ALLOWED_HOSTS", "[]"))
 DEBUG = str(os.getenv("DEBUG"))
-CORS_ALLOWED_ORIGINS = json.loads(os.getenv("CORS_ALLOWED_ORIGINS"))
+CORS_ALLOWED_ORIGINS = json.loads(os.getenv("CORS_ALLOWED_ORIGINS", "[]"))
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
