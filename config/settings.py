@@ -11,27 +11,22 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 """
 
 from pathlib import Path
+from dotenv import load_dotenv
 
+import json
+import os
+
+dotenv_path = os.path.join(os.path.dirname(__file__), '.env')
+load_dotenv(dotenv_path)
+
+SECRET_KEY = str(os.getenv("SECRET_KEY"))
+ALLOWED_HOSTS = json.loads(os.getenv("ALLOWED_HOSTS"))
+DEBUG = str(os.getenv("DEBUG"))
+CORS_ALLOWED_ORIGINS = json.loads(os.getenv("CORS_ALLOWED_ORIGINS"))
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
-
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-0t(ccfi&j17=w^dv9d&+1gho@5d$(i59sji$sr_2d+kq3k18g-'
-
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-
-ALLOWED_HOSTS = ["localhost"]
-
-CORS_ALLOWED_ORIGINS = ["http://localhost:5173"]
-
 AUTH_USER_MODEL = 'user_auth.User'
-
-# Application definition
 
 INSTALLED_APPS = [
     'django.contrib.admin',
