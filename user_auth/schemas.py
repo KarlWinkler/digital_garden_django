@@ -14,10 +14,14 @@ class SignupSchema(Schema):
     last_name: str
     password: str
 
+class GroupSchema(Schema):
+    name: str
 
 class UserSchema(Schema):
     id: int
     username: str
+    is_superuser: bool
+    groups: list[GroupSchema]
 
 
 class UserCreateSchema(Schema):

@@ -26,7 +26,7 @@ def get_user(request, id: int):
     return get_object_or_404(User, pk=id)
 
 
-@router.post("/auth/login", response={200: UserSchema}, auth=None)
+@router.post("/auth/login", response={200: UserSchema, 401: Error}, auth=None)
 def login(request, credentials: UserCredentials):
     user = authenticate(request, email=credentials.email, password=credentials.password)
 
