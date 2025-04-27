@@ -15,6 +15,7 @@ from common_schemas import Error
 
 router = Router(auth=django_auth)
 
+
 @router.get("/self", response={200: UserSchema, 404: str})
 def get_current_user(request):
     if request.user.is_authenticated:
