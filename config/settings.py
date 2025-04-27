@@ -25,11 +25,8 @@ DEBUG = str(os.getenv("DEBUG"))
 CORS_ALLOWED_ORIGINS = json.loads(os.getenv("CORS_ALLOWED_ORIGINS", "[]"))
 CORS_ALLOW_CREDENTIALS = True
 
-if not DEBUG:
-    CSRF_COOKIE_SECURE = True
-    SESSION_COOKIE_SECURE = True
-    CSRF_COOKIE_SAMESITE = 'None'
-    SESSION_COOKIE_SAMESITE = 'None'
+CSRF_COOKIE_DOMAIN=str(os.getenv("COOKIE_DOMAIN"))
+SESSION_COOKIE_DOMAIN=(os.getenv("COOKIE_DOMAIN"))
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
