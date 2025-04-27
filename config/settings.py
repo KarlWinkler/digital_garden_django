@@ -23,6 +23,8 @@ SECRET_KEY = str(os.getenv("SECRET_KEY"))
 ALLOWED_HOSTS = json.loads(os.getenv("ALLOWED_HOSTS", "[]"))
 DEBUG = str(os.getenv("DEBUG"))
 CORS_ALLOWED_ORIGINS = json.loads(os.getenv("CORS_ALLOWED_ORIGINS", "[]"))
+CORS_ALLOW_CREDENTIALS = True
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
