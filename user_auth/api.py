@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404
-
+from django.http import HttpRequest, HttpResponse
 from django.contrib.auth import login as auth_login
 from django.contrib.auth import logout as auth_logout
 from django.contrib.auth import authenticate
@@ -15,6 +15,13 @@ from common_schemas import Error
 
 router = Router(auth=django_auth)
 
+@router.get("/self", response={200: UserSchema, 404: str})
+def get_current_user(request):
+    if request.user.is_authenticated:
+        return 200, request.user
+    else:
+        return 404, "User not authenticated"
+
 
 @router.get("/", response={200: list[UserSchema]})
 def list_users(request):
@@ -27,14 +34,15 @@ def get_user(request, id: int):
 
 
 @router.post("/auth/login", response={200: UserSchema, 401: Error}, auth=None)
-def login(request, credentials: UserCredentials):
+def login(request: HttpRequest, response: HttpResponse, credentials: UserCredentials):
     user = authenticate(request, email=credentials.email, password=credentials.password)
 
     if user is not None:
         auth_login(request, user)
+        response.set_cookie("cookie", "test", samesite='Lax', secure=True)
         return 200, user
     else:
-        return 401, {'message': 'invalid credentials'}
+        return 401, {'message': 'Invalid Username or Password'}
 
 
 @router.post("/auth/signup", response={422: Error, 201: UserSchema})
