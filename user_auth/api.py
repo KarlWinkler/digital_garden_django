@@ -46,10 +46,10 @@ def login(request: HttpRequest, response: HttpResponse, credentials: UserCredent
         return 401, {'message': 'Invalid Username or Password'}
 
 
-@router.post("/auth/signup", response={422: Error, 201: UserSchema})
+@router.post("/auth/signup", response={422: Error, 201: UserSchema, 401: str}, auth=None)
 def signup(request, signup: SignupSchema):
     try:
-        user = User.objects.create(signup)
+        user = User.objects.create(**signup.dict())
         user.set_password(signup.password)
         user.save()
 

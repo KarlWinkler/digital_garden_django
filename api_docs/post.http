@@ -39,6 +39,11 @@ X-CSRFToken: {{csrf}}
     "archived": false
 }
 
+PUT {{server_url}}/api/post/1
+Content-Type: application/json
+X-CSRFToken: {{csrf}}
+
+{"status":"Flower","summary":"Making Waves!","content":"hello this is a test\n# Header1\n- bullet point\n\n`code`\nE\n```python\ndef a()\n\n    update()\n```"}
 
 DELETE {{server_url}}/api/post/5
 Content-Type: application/json

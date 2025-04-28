@@ -5,4 +5,16 @@ Content-Type: application/json
   "email": "{{email}}",
   "password": "{{password}}"
 }
-{{console.info(response.rawHeaders)}}
+// {{console.info(response.rawHeaders)}}
+
+POST {{server_url}}/api/user/auth/signup
+Content-Type: application/json
+
+
+{
+  "email": "k@w.ca",
+  "username": "k",
+  "first_name": "k",
+  "last_name": "w",
+  "password": "pass"
+}
