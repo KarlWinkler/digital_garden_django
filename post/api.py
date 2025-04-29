@@ -14,6 +14,7 @@ from post.schemas import (
     CommentCreateSchema,
     CommentUpdateSchema,
 )
+from post.services import PostService
 
 from common_schemas import Error
 
@@ -31,8 +32,15 @@ def get_post(request, key: str):
     return 200, get_object_or_404(Post, slug=key)
 
 
-@router.post("/", response={201: PostSchema, 400: str}, auth=django_auth)
+@router.post("/", response={201: PostSchema, 400: str, 401: str}, auth=django_auth)
 def create_post(request, data: PostCreateSchema):
+    if not data.slug and not data.title:
+        return 401, "Slug or Title must not be blank"
+    elif not data.slug:
+        data.slug = PostService.slugify(data.title)
+
+    data.category, _ = Category.objects.get_or_create(name=data.category)
+
     post = Post.objects.filter(slug=data.slug)
     if post.exists():
         return 400, "Slug already exists"

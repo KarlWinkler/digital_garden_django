@@ -9,12 +9,13 @@ Content-Type: application/json
 X-CSRFToken: {{csrf}}
 
 {
-    "title": "test",
+    "title": "",
     "status": "Seed",
     "summary": "testin things out",
     "category_id": 1,
-    "slug": "test_another",
-    "content": "hello this is a test"
+    "slug": "Sane",
+    "content": "hello this is a test",
+    "category": "art"
 }
 // {{console.info(request)}}
 

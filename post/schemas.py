@@ -25,6 +25,10 @@ class CommentUpdateSchema(Schema):
     archived: int = None
 
 
+class SimpleCategorySchema(Schema):
+    name: str
+
+
 class PostSchema(Schema):
     id: int
     title: str
@@ -35,15 +39,16 @@ class PostSchema(Schema):
     created_at: datetime
     updated_at: datetime
     archived: bool
+    category: SimpleCategorySchema
 
 
 class PostCreateSchema(Schema):
     title: str
     status: str
     summary: str
-    slug: str
     content: str
-    category_id: int
+    category: str
+    slug: str = None
     archived: bool = None
 
 
@@ -56,6 +61,14 @@ class PostUpdateSchema(Schema):
     category_id: int = None
     archived: bool = None
 
+
+class SimplePostSchema(Schema):
+    title: str
+    slug: str
+    status: str
+    summary: str
+
+
 class CategorySchema(Schema):
     name: str
-    posts: list[PostSchema]
+    posts: list[SimplePostSchema]
