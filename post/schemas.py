@@ -1,5 +1,5 @@
 from typing import Optional
-from ninja import Schema
+from ninja import Field, Schema
 from datetime import datetime
 
 
@@ -42,7 +42,7 @@ class PostSchema(Schema):
     updated_at: datetime
     archived: bool
     category: SimpleCategorySchema
-    comments: list[CommentSchema]
+    top_level_comments: list[CommentSchema]
 
 
 class PostCreateSchema(Schema):

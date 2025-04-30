@@ -33,6 +33,10 @@ class Post(models.Model):
 
     category = models.ForeignKey('post.Category', on_delete=models.PROTECT, related_name="posts")
 
+    @property
+    def top_level_comments(self):
+        return self.comments.filter(parent=None)
+
     def __str__(self):
         return self.title
 
