@@ -11,6 +11,7 @@ class CommentSchema(Schema):
     created_at: datetime
     updated_at: datetime
     user: UserSchema
+    children: list['CommentSchema'] = []
 
 
 class CommentCreateSchema(Schema):
@@ -40,6 +41,7 @@ class PostSchema(Schema):
     updated_at: datetime
     archived: bool
     category: SimpleCategorySchema
+    comments: list[CommentSchema]
 
 
 class PostCreateSchema(Schema):

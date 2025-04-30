@@ -48,7 +48,7 @@ class Comment(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
     # PROTECT to encourage archive rather than delete as the default fuctionality.
-    user = models.ForeignKey('user_auth.User', on_delete=models.PROTECT)
-    post = models.ForeignKey('post.Post', on_delete=models.PROTECT)
+    user = models.ForeignKey('user_auth.User', on_delete=models.PROTECT, related_name="comments")
+    post = models.ForeignKey('post.Post', on_delete=models.PROTECT, related_name="comments")
     # parent == null then top level comment
-    parent = models.ForeignKey('post.Comment', on_delete=models.PROTECT, null=True)
+    parent = models.ForeignKey('post.Comment', on_delete=models.PROTECT, blank=True, null=True, related_name="children")
