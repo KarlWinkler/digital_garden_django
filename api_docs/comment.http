@@ -1,28 +1,30 @@
 GET {{server_url}}/api/post/comment/all
 Content-Type: application/json
 
-GET {{server_url}}/api/post/1/comment
+GET {{server_url}}/api/post/test_another/comment
 Content-Type: application/json
 
-POST {{server_url}}/api/post/3/comment
+POST {{server_url}}/api/post/test_another/comment
 Content-Type: application/json
 X-CSRFToken: {{csrf}}
 
 {
     "user_id": 1,
+    "parent_id": 11,
     "content": "really good post"
 }
 
-PUT {{server_url}}/api/post/comment/1
+PUT {{server_url}}/api/post/comment/12
 Content-Type: application/json
 X-CSRFToken: {{csrf}}
 
 {
     "user_id": 1,
+    "parent_id": 11,
     "content": "Updated Comment"
 }
 
-PUT {{server_url}}/api/post/comment/1
+PUT {{server_url}}/api/post/comment/11
 Content-Type: application/json
 X-CSRFToken: {{csrf}}
 

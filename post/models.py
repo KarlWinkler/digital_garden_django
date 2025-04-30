@@ -52,3 +52,6 @@ class Comment(models.Model):
     post = models.ForeignKey('post.Post', on_delete=models.PROTECT, related_name="comments")
     # parent == null then top level comment
     parent = models.ForeignKey('post.Comment', on_delete=models.PROTECT, blank=True, null=True, related_name="children")
+
+    class Meta:
+        ordering = ["-created_at"]

@@ -7,6 +7,7 @@ from user_auth.schemas import UserSchema
 
 
 class CommentSchema(Schema):
+    id: int
     content: str
     created_at: datetime
     updated_at: datetime
@@ -16,8 +17,8 @@ class CommentSchema(Schema):
 
 class CommentCreateSchema(Schema):
     content: str
-    user_id: int
-    archived: int = False
+    parent_id: int = None
+    archived: bool = False
 
 
 class CommentUpdateSchema(Schema):

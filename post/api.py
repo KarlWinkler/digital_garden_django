@@ -85,14 +85,15 @@ def get_all_comments(request):
     return Comment.objects.all()
 
 
-@router.get("/{id}/comment", response={200: list[CommentSchema]})
-def get_comments(request, id: int):
-    return Comment.objects.filter(post_id=id)
+@router.get("/{slug}/comment", response={200: list[CommentSchema]})
+def get_comments(request, slug: str):
+    return Comment.objects.filter(post__slug=slug)
 
 
-@router.post("/{id}/comment", response={201: CommentSchema}, auth=django_auth)
-def create_comment(request, id: int, data: CommentCreateSchema):
-    comment = Comment.objects.create(**data.dict(exclude_unset=True), post_id=id)
+@router.post("/{slug}/comment", response={201: CommentSchema}, auth=django_auth)
+def create_comment(request, slug: str, data: CommentCreateSchema):
+    post = get_object_or_404(Post, slug=slug)
+    comment = Comment.objects.create(**data.dict(exclude_unset=True), post=post, user=request.user)
 
     return 201, comment
 
