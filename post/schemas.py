@@ -61,7 +61,7 @@ class PostUpdateSchema(Schema):
     summary: str = None
     slug: str = None
     content: str = None
-    category_id: int = None
+    category: str = None
     archived: bool = None
 
 

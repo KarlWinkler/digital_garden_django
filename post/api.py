@@ -56,6 +56,7 @@ def update_post(request, key: int, data: PostUpdateSchema):
 
     if post.exists():
         try:
+            data.category, _ = Category.objects.get_or_create(name=data.category)
             post.update(**data.dict(exclude_unset=True))
             post.first().save(update_fields=['updated_at']) # to update updated_at field
 
