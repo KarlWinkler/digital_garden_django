@@ -12,9 +12,7 @@ Content-Type: application/json
 
 
 {
-  "email": "k@w.ca",
+  "email": "ka@wi.ca",
   "username": "k",
-  "first_name": "k",
-  "last_name": "w",
   "password": "pass"
 }

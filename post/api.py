@@ -13,6 +13,7 @@ from post.schemas import (
     CommentSchema,
     CommentCreateSchema,
     CommentUpdateSchema,
+    SimpleCommentSchema,
 )
 from post.services import PostService
 
@@ -81,7 +82,7 @@ def delete_post(request, id: int):
 
 
 
-@router.get("/comment/all", response={200: list[CommentSchema]})
+@router.get("/comment/all", response={200: list[SimpleCommentSchema]})
 def get_all_comments(request):
     return Comment.objects.all()
 

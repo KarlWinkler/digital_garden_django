@@ -8,7 +8,7 @@ from ninja import Router
 from ninja.security import django_auth
 
 from user_auth.models import User
-from user_auth.schemas import UserSchema, UserCredentials, SignupSchema
+from user_auth.schemas import UserSchema, UserCredentials, UserCreateSchema
 
 from common_schemas import Error
 
@@ -47,7 +47,7 @@ def login(request: HttpRequest, response: HttpResponse, credentials: UserCredent
 
 
 @router.post("/auth/signup", response={422: Error, 201: UserSchema, 401: Error}, auth=None)
-def signup(request, signup: SignupSchema):
+def signup(request, signup: UserCreateSchema):
     try:
         user = User.objects.create(**signup.dict())
         user.set_password(signup.password)

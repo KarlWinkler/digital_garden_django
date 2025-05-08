@@ -15,6 +15,15 @@ class CommentSchema(Schema):
     children: list['CommentSchema'] = []
 
 
+class SimpleCommentSchema(Schema):
+    id: int
+    username: str = Field(..., alias="user.username")
+    content: str
+    created_at: datetime
+    post_slug: str = Field(..., alias="post.slug")
+    post_title: str = Field(..., alias="post.title")
+
+
 class CommentCreateSchema(Schema):
     content: str
     parent_id: int = None

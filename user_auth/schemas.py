@@ -7,19 +7,16 @@ class UserCredentials(Schema):
     password: str
 
 
-class SignupSchema(Schema):
-    username: str
-    email: str
-    first_name: str
-    last_name: str
-    password: str
-
 class GroupSchema(Schema):
     name: str
+
 
 class UserSchema(Schema):
     id: int
     username: str
+    email: str
+    first_name: str
+    last_name: str
     is_superuser: bool
     groups: list[GroupSchema]
 
@@ -27,8 +24,8 @@ class UserSchema(Schema):
 class UserCreateSchema(Schema):
     username: str
     email: str
-    first_name: str
-    last_name: str
+    first_name: str = ""
+    last_name: str = ""
     password: str
 
 
