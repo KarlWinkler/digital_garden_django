@@ -17,6 +17,7 @@ from post.schemas import (
 )
 from post.services import PostService
 
+from django.db.models import Count, Q
 from common_schemas import Error
 
 
@@ -25,7 +26,12 @@ router = Router()
 
 @router.get("/", response={200: list[CategorySchema]})
 def list_posts(request):
-    return 200, Category.objects.all().select_related()
+    posts = (Category.objects
+                     .annotate(posts_count=Count('posts', filter=Q(posts__archived=False)))
+                     .filter(posts_count__gt=0)
+                     .select_related())
+
+    return 200, posts
 
 
 @router.get("/{key}", response={200: PostSchema})
